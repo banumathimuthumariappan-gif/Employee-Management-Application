@@ -1,1 +1,42 @@
-<p>dashboard works!</p>
+<div class="container-fluid">
+  <div class="row g-5">
+    <!-- Left Column -->
+    <div class="col-md-6">
+      <!-- Total Employees -->
+      <div class="row-mb-4 total-employees">
+        <app-card title="Total Employees" [value]="totalEmployeeCount" />
+      </div>
+
+      <!-- Employee Types -->
+      <div class="row-mb-4">
+        <div class="card">
+          <div class="card-header">Employee Types</div>
+          <div class="card-body">
+            <app-card title="Full Time" [value]="fullTimeEmployeeCount" />
+            <app-card title="Part Time" [value]="partTimeEmployeeCount" />
+            <app-card title="Contract" [value]="contractEmployeeCount" />
+            <app-card title="Intern" [value]="internEmployeeCount" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="col-md-6">
+      <div class="row-mb-4">
+        <div class="card">
+          <div class="card-header">Departments</div>
+          <div class="card-body">
+            <app-card title="Technical" [value]="technicalDepartmentCount" />
+            <app-card
+              title="Non Technical"
+              [value]="nonTechnicalDepartmentCount"
+            />
+            <app-card title="Sales" [value]="salesDepartmentCount" />
+            <app-card title="Marketing" [value]="marketingDepartmentCount" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

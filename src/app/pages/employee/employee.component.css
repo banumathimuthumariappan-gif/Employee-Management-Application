@@ -1,31 +1,11 @@
 .header-part {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#addNewEmployeeButton {
-    margin-bottom: 2px;
-}
-
-.error-message {
-    color: red;
-}
-
-.form-actions {
-    margin: 1rem;
-}
-
-.form-actions > button {
-    margin-right: 1rem;
-}
-
-.form-control {
-    margin: 0.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .dashboard-header {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }

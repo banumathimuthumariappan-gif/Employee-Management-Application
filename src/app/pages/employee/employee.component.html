@@ -1,14 +1,22 @@
 <div class="container-fluid">
-  <div class="row">
-    <!-- Employees List -->
-    <div class="col-md-7">
-      <div class="header-part">
-        <h2>Employee Portal</h2>
-        <button class="btn btn-success" id="addNewEmployeeButton" (click)="showAddEmployeeForm()">
-          Add New Employee
-        </button>
-      </div>
-      <table class="table table-bordered table-hover">
+  <div class="col-md-12">
+    <div
+      *ngIf="showAlert"
+      class="alert alert-warning alert-dismissible fade show"
+      role="alert"
+    >
+      <strong>No Employee Found</strong> with the ID
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+        (click)="showAlert = false"
+      ></button>
+    </div>
+    <div class="row">
+      <!-- Employees List -->
+      <table class="table table-bordered table-hover table-responsive">
         <thead>
           <tr>
             <th>Employee ID</th>
@@ -37,295 +45,30 @@
             <td>{{ employee.employeeType }}</td>
             <td>{{ employee.salary }}</td>
             <td>
-              <button style="margin-right: 5px" class="btn btn-primary">
+              <button
+                style="margin-right: 5px"
+                class="btn btn-primary"
+                (click)="editEmployee(employee.employeeId)"
+              >
                 Edit
               </button>
-              <button style="margin-right: 5px" class="btn btn-info">
+              <button
+                style="margin-right: 5px"
+                class="btn btn-info"
+                (click)="deleteEmployee(employee.employeeId)"
+              >
                 Delete
               </button>
-              <button class="btn btn-secondary">View</button>
+              <button
+                class="btn btn-secondary"
+                (click)="displayEmployee(employee.employeeId)"
+              >
+                View
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
-    </div>
-    <!--  Employee Form -->
-    <div class="col-md-5" *ngIf="showForm">
-        <div class="card">
-        <div class="card-header">
-          <!-- {{ updatingEmployee === true ? 'Edit Employee' : 'Add New Employee'}} -->
-            Add New Employee
-        </div>
-        <div class="card-body">
-          <form
-            id="employee-form"
-            #employeeForm="ngForm"
-            (ngSubmit)="createEmployee(employeeForm)"
-          >
-            <div class="form-group row">
-              <label for="fullName" class="col-sm-3 col-form-label"
-                >Full Name</label
-              >
-              <div class="col-sm-9">
-                <input
-                  class="form-control"
-                  type="text"
-                  name="fullName"
-                  id="fullName"
-                  required
-                  placeholder="Enter FullName"
-                  [(ngModel)]="employeeData.fullName"
-                  #fullName="ngModel"
-                  minlength="3"
-                />
-                <div
-                  class="error-message"
-                  *ngIf="fullName.touched && fullName.invalid"
-                >
-                  FullName is required (Minimum 3 characters)
-                </div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="email" class="col-sm-3 col-form-label">Email</label>
-              <div class="col-sm-9">
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  class="form-control"
-                  required
-                  placeholder="Enter Email ID"
-                  [(ngModel)]="employeeData.email"
-                  #email="ngModel"
-                />
-                <div
-                  *ngIf="email.touched && email.invalid"
-                  class="error-message"
-                >
-                  Valid Email Id is required
-                </div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="phone" class="col-sm-3 col-form-label"
-                >Contact Number</label
-              >
-              <div class="col-sm-9">
-                <input
-                  type="tel"
-                  name="phone"
-                  id="phone"
-                  class="form-control"
-                  required
-                  pattern="^[0-9]{10}$"
-                  placeholder="9999999999"
-                  [(ngModel)]="employeeData.phone"
-                  #phone="ngModel"
-                />
-                <div
-                  *ngIf="phone.touched && phone.invalid"
-                  class="error-message"
-                >
-                  Enter 10 digit valid phone number
-                </div>
-              </div>
-            </div>
-            <fieldset class="form-group">
-              <div class="row">
-                <legend class="col-form-label col-sm-3">Gender</legend>
-                <div class="col-sm-9">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="gender"
-                      id="male"
-                      value="Male"
-                      required
-                      [(ngModel)]="employeeData.gender"
-                      #gender="ngModel"
-                    />
-                    <label class="form-check-label" for="male"> Male </label>
-                  </div>
-                  <div class="col-sm-9">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="gender"
-                        id="female"
-                        value="Female"
-                        required
-                        [(ngModel)]="employeeData.gender"
-                        #gender="ngModel"
-                      />
-                      <label class="form-check-label" for="female">
-                        Female
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  *ngIf="gender.touched && gender.invalid"
-                  class="error-message"
-                >
-                  Please select gender
-                </div>
-              </div>
-            </fieldset>
-            <div class="form-group row">
-              <label for="departmentId" class="col-sm-3 col-form-label"
-                >Department</label
-              >
-              <div class="col-sm-9">
-                <select
-                  name="departmentId"
-                  id="departmentId"
-                  required
-                  class="form-control"
-                  [(ngModel)]="employeeData.departmentId"
-                  #departmentId="ngModel"
-                  (change)="onDepartmentIDSelected(employeeData.departmentId)"
-                >
-                  <option value="" disabled selected>
-                    ---SELECT DEPARTMENT ---
-                  </option>
-                  <option
-                    *ngFor="let department of departments"
-                    value="{{ department.departmentId }}"
-                  >
-                    {{ department.departmentName }}
-                  </option>
-                </select>
-                <div
-                  *ngIf="departmentId.touched && departmentId.invalid"
-                  class="error-message"
-                >
-                  Please select Department
-                </div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="designationId" class="col-sm-3 col-form-label"
-                >Designation</label
-              >
-              <div class="col-sm-9">
-                <select
-                  name="designationId"
-                  id="designationId"
-                  required
-                  class="form-control"
-                  [(ngModel)]="employeeData.designationName"
-                  #designationId="ngModel"
-                >
-                  <option value="" disabled selected>
-                    --- SELECT DESIGNATION ---
-                  </option>
-                  <option
-                    *ngFor="let designation of selectedDesignation"
-                    value="{{ designation.designationName }}"
-                  >
-                    {{ designation.designationName }}
-                  </option>
-                </select>
-                <div
-                  *ngIf="designationId.touched && designationId.invalid"
-                  class="error-message"
-                >
-                  Please select Designation ID
-                </div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="employeeType" class="col-sm-3 form-check-label"
-                >Employee Type</label
-              >
-              <div class="col-sm-9">
-                <select
-                  name="employeeType"
-                  id="employeeType"
-                  required
-                  class="form-control"
-                  [(ngModel)]="employeeData.employeeType"
-                  #employeeType="ngModel"
-                >
-                  <option value="" disabled selected>
-                    --- SELECT EMPLOYEE TYPE ---
-                  </option>
-                  <option
-                    *ngFor="let employeeType of employeeTypes"
-                    value="{{ employeeType.employeeTypeName }}"
-                  >
-                    {{ employeeType.employeeTypeName }}
-                  </option>
-                </select>
-                <div *ngIf="employeeType.touched && employeeType.invalid">
-                  Please select Employee type
-                </div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="joiningDate" class="col-sm-3 form-check-label"
-                >Date of Joining</label
-              >
-              <div class="col-sm-9">
-                <input
-                  class="form-control"
-                  type="date"
-                  name="dateOfJoining"
-                  id="dateOfJoining"
-                  required
-                  [(ngModel)]="employeeData.dateOfJoining"
-                  #dateOfJoining="ngModel"
-                />
-                <div
-                  class="error-message"
-                  *ngIf="dateOfJoining.touched && dateOfJoining.invalid"
-                >
-                  Please select Date of joining
-                </div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="salary" class="col-sm-3 form-check-label"
-                >Salary</label
-              >
-              <div class="col-sm-9">
-                <input
-                  type="number"
-                  name="salary"
-                  id="salary"
-                  required
-                  placeholder="Enter Salary"
-                  class="form-control"
-                  [(ngModel)]="employeeData.salary"
-                  #salary="ngModel"
-                  min="1"
-                />
-                <div
-                  *ngIf="salary.touched && salary.invalid"
-                  class="error-message"
-                >
-                  Salary should be greater than 0
-                </div>
-              </div>
-            </div>
-            <div class="form-actions">
-              <button class="btn btn-success">
-                <!-- {{ updatingEmployee === true? 'Edit Employee' : 'Add Employee'}} -->
-                  Add Employee
-            </button>
-              <button
-                class="btn btn-secondary"
-                (click)="closeAddEmployeeForm()"
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
     </div>
   </div>
 </div>

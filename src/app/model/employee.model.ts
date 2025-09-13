@@ -5,6 +5,7 @@ export interface Employee {
   phone: string;
   gender: string;
   dateOfJoining: string;
+  departmentId: string;
   departmentName: string;
   designationName: string;
   employeeType: string;

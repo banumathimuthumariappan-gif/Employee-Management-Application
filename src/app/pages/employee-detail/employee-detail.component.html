@@ -1,1 +1,38 @@
-<p>employee-detail works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h4>{{ currentEmployee?.fullName }}</h4>
+        </div>
+        <div class="card-body">
+          <div class="mb-2">
+            <strong>Employee ID: </strong> {{ currentEmployee.employeeId }}
+          </div>
+          <div class="mb-2">
+            <strong>Email: </strong> {{ currentEmployee.email }}
+          </div>
+          <div class="mb-2">
+            <strong>Gender: </strong> {{ currentEmployee.gender }}
+          </div>
+          <div class="mb-2">
+            <strong>Department: </strong> {{ currentEmployee.departmentName }}
+          </div>
+          <div class="mb-2">
+            <strong>Designation: </strong> {{ currentEmployee.designationName }}
+          </div>
+          <div class="mb-2">
+            <strong>Employee Type: </strong> {{ currentEmployee.employeeType }}
+          </div>
+          <div class="mb-2">
+            <strong>Date of Joining: </strong>
+            {{ currentEmployee.dateOfJoining | date }}
+          </div>
+          <div class="mb-2">
+            <strong>Salary: </strong> {{ currentEmployee.salary }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

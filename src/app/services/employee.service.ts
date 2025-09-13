@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
-import { Departments, Designation, Employee, EmployeeType } from '../model/employee.model';
+import {
+  Departments,
+  Designation,
+  Employee,
+  EmployeeType,
+} from '../model/employee.model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +25,7 @@ export class EmployeeService {
       designationName: 'Developer',
       employeeType: 'Full Time',
       salary: 82000,
+      departmentId: '1',
     },
     {
       employeeId: 2,
@@ -32,6 +38,7 @@ export class EmployeeService {
       designationName: 'Sales lead',
       employeeType: 'Part Time',
       salary: 48000,
+      departmentId: '3',
     },
     {
       employeeId: 3,
@@ -44,6 +51,7 @@ export class EmployeeService {
       designationName: 'Insta lead',
       employeeType: 'Intern',
       salary: 25000,
+      departmentId: '4',
     },
     {
       employeeId: 4,
@@ -56,6 +64,7 @@ export class EmployeeService {
       designationName: 'Manager',
       employeeType: 'Contract',
       salary: 70000,
+      departmentId: '2',
     },
     {
       employeeId: 5,
@@ -68,6 +77,7 @@ export class EmployeeService {
       designationName: 'Tester',
       employeeType: 'Full Time',
       salary: 65000,
+      departmentId: '1',
     },
   ];
   private employeeTypes = [
@@ -88,7 +98,11 @@ export class EmployeeService {
       { departmentId: 1, designationId: 2, designationName: 'Tester' },
     ],
     [
-      { departmentId: 2, designationId: 1, designationName: 'Document Creator'},
+      {
+        departmentId: 2,
+        designationId: 1,
+        designationName: 'Document Creator',
+      },
       { departmentId: 2, designationId: 2, designationName: 'Manager' },
     ],
     [
@@ -104,8 +118,12 @@ export class EmployeeService {
   private employeeSubject = new BehaviorSubject<Employee[]>([
     ...this.employees,
   ]);
-  private employeeTypeSubject = new BehaviorSubject<EmployeeType[]>([...this.employeeTypes]);
-  private departmentsSubject = new BehaviorSubject<Departments[]>([...this.departments]);
+  private employeeTypeSubject = new BehaviorSubject<EmployeeType[]>([
+    ...this.employeeTypes,
+  ]);
+  private departmentsSubject = new BehaviorSubject<Departments[]>([
+    ...this.departments,
+  ]);
   private designationsSubject = new BehaviorSubject<Designation[]>(
     this.designations.flat()
   );
@@ -134,7 +152,7 @@ export class EmployeeService {
     return this.employeeTypeSubject.asObservable();
   }
 
-  // Get the list of Departments 
+  // Get the list of Departments
   getDepartments() {
     return this.departmentsSubject.asObservable();
   }
@@ -144,7 +162,43 @@ export class EmployeeService {
     return this.designationsSubject.asObservable();
   }
 
-  createEmployee()  {
-    
+  // Add the new employee to the list of employees
+  createEmployee(newEmployeeData: Employee) {
+    this.employees.push(newEmployeeData);
+    this.employeeSubject.next([...this.employees]);
+    return of(newEmployeeData);
+  }
+
+  // Delete the employee based on id
+  deleteEmployee(id: number) {
+    const index = this.employees.findIndex(
+      (employee) => employee.employeeId === id
+    );
+    if (index >= 0) {
+      this.employees.splice(index, 1);
+      this.employeeSubject.next([...this.employees]);
+      return of(true);
+    }
+    return of(false);
+  }
+
+  // Getting the employee details by ID
+  getEmployeeById(id: number) {
+    const employee = this.employees.find(
+      (employee) => employee.employeeId === id
+    );
+    return of(employee);
+  }
+
+  updateEmployee(empId: number, updatedEmployee: Employee) {
+    const index = this.employees.findIndex(
+      (employee) => employee.employeeId === empId
+    );
+    if (index !== -1) {
+      this.employees[index] = { ...updatedEmployee };
+      this.employeeSubject.next([...this.employees]);
+      return of<Employee | null>(updatedEmployee);
+    }
+    return of(null);
   }
 }
