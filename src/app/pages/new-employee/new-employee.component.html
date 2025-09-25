@@ -2,29 +2,37 @@
   <div class="row">
     <div class="col-md-12">
       <!-- Create success alert -->
-      <div *ngIf="showAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
+      <div
+        *ngIf="showAlert"
+        class="alert alert-warning alert-dismissible fade show"
+        role="alert"
+      >
         <strong>SUCCESS!!!</strong> New Employee added successfully
         <button
           type="button"
           class="btn-close"
           data-bs-dismiss="alert"
           aria-label="Close"
-          (click)="showAlert=false"
+          (click)="showAlert = false"
         ></button>
       </div>
 
       <!-- Edit success alert -->
-      <div *ngIf="showEditAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
+      <div
+        *ngIf="showEditAlert"
+        class="alert alert-warning alert-dismissible fade show"
+        role="alert"
+      >
         <strong>SUCCESS!!!</strong> Employee edited successfully
         <button
           type="button"
           class="btn-close"
           data-bs-dismiss="alert"
           aria-label="Close"
-          (click)="showEditAlert=false"
+          (click)="showEditAlert = false"
         ></button>
       </div>
-      
+
       <div class="card">
         <div class="card-header">
           {{ editingEmployee === true ? "Edit Employee" : "Add New Employee" }}
@@ -233,7 +241,10 @@
                     {{ employeeType.employeeTypeName }}
                   </option>
                 </select>
-                <div *ngIf="employeeType.touched && employeeType.invalid">
+                <div
+                  *ngIf="employeeType.touched && employeeType.invalid"
+                  class="error-message"
+                >
                   Please select Employee type
                 </div>
               </div>
