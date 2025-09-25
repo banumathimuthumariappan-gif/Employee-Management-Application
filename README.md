@@ -65,6 +65,13 @@ An Angular web application to manage employee data: create, view, edit, delete e
 
 - The compiled output is placed in the dist/Employee-Management-Application/ folder by default (check your angular.json for the exact output path).
 
+## Screenshots
+![Login Page](./App-Screenshots//Login-Page.png)
+![Dashboard](./App-Screenshots/Dashboard.png)
+![Display Employees Page](./App-Screenshots/Display-employees.png)
+![Add New Employee Page](./App-Screenshots/Add-New-Employee.png)
+![Employee Detail Page](./App-Screenshots/Employee-Detail.png)
+
 ## 📄 License & Credits
 
 This project is open source. You are free to use, modify, and distribute it.
