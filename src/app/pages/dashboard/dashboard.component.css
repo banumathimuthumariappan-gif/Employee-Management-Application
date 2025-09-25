@@ -1,3 +1,7 @@
+.container-fluid {
+    overflow-x: hidden;
+}
+
 .total-employees {
     margin-bottom: 20px;
 }
