@@ -1,59 +1,72 @@
-# EmployeeManagementApplication
+# Employee Management Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
+**Live Demo:** [employee-management-application-two.vercel.app](https://employee-management-application-two.vercel.app)  
 
-## Development server
+An Angular web application to manage employee data: create, view, edit, delete employees. Built using Angular, TypeScript, CSS, and deployed to Vercel.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## 🧰 Features
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Add new employees  
+- View a list of employees  
+- Edit existing employee details  
+- Delete employees  
+- Responsive UI layout  
+- Uses Angular template driven forms, reactive forms  
+- Client-side routing with route fallback (for deep links)  
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 📁 Project Structure
 
-```bash
-ng generate component component-name
-```
+/Employee-Management-Application
+├── src/
+│ ├── app/
+│ │ ├── pages/ # Views like dashboard, employee, employee detail, layout, login, new-employee, not-found etc.
+│ │ ├── shared/ # Shared components like card
+│ │ ├── services/ # Employee Service
+│ │ ├── model/ # Employee Model
+│ │ └── app.module.ts
+│ ├── environments/
+│ └── index.html
+├── angular.json
+├── package.json
+├── tsconfig.json
+├── vercel.json
+└── README.md
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🚀 Getting Started
 
-```bash
-ng generate --help
-```
+### Prerequisites
 
-## Building
+- [Node.js](https://nodejs.org) (v16+ recommended)  
+- Angular CLI installed globally:  
+  ```bash
+  npm install -g @angular/cli
 
-To build the project run:
+## 🚀 Installation
 
-```bash
-ng build
-```
+### Clone the repo
+- git clone https://github.com/banumathimuthumariappan-gif/Employee-Management-Application.git
+- cd Employee-Management-Application
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Install dependencies
+- npm install
 
-## Running unit tests
+## 🚀 Installation
+- ng serve
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- By default, the app is served at http://localhost:4200/. 
+- It supports live reloading when you modify source files.
 
-```bash
-ng test
-```
+## Building for Production
+- ng build
 
-## Running end-to-end tests
+- The compiled output is placed in the dist/Employee-Management-Application/ folder by default (check your angular.json for the exact output path).
 
-For end-to-end (e2e) testing, run:
+## 📄 License & Credits
 
-```bash
-ng e2e
-```
+This project is open source. You are free to use, modify, and distribute it.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Made with ❤️ by Banumathi Muthumariappan
